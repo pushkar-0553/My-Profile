@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #292b2c;
+    padding: 15px;
+}
+
+.nav-link {
+    font-size: 18px;
+    color: #fff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #00aaff !important;
+}
+
+/* Header Section */
+.header-bg {
+    background: linear-gradient(135deg, #5ea9ff 0%, #6610f2 100%);
+    padding: 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease;
+}
+
+.lead {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.buttons a {
+    margin: 10px;
+}
+
+.highlight {
+    color: #ffc107;
+}
+
+.profile-picture img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: easeOut 2s forwards;
+    animation-delay: 1s;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background-color: #007bff;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Info and Experience Boxes */
+.info-box, .experience-box {
+    background-color: #fff;
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border:0.5px solid #000000;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.info-box:hover, .experience-box:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(135deg, #ccd2d8 0%, #4ed2fa 100%);
+}
+
+/* Footer */
+footer {
+    background-color: #292b2c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes easeOut {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 2s ease;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 2s ease;
+}
+
+.animate-easeOut {
+    animation: easeOut 2s ease;
+}
