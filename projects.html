@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Projects showcase by Kagitha Pushkara Sai Vardhan">
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+        
+        <!-- UNICONS -->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/projects.css">
+
+        <title>GitHub Projects | Pushkar Waykole</title>
+    </head>
+    <body>
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="index.html" class="nav__logo">Pushkar Waykole</a>
+                
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list grid">
+                        <li class="nav__item">
+                            <a href="index.html" class="nav__link">
+                                <i class="uil uil-estate nav__icon"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="index.html#about" class="nav__link">
+                                <i class="uil uil-user nav__icon"></i> About
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="index.html#skills" class="nav__link">
+                                <i class="uil uil-file-alt nav__icon"></i> Skills
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#" class="nav__link active-link">
+                                <i class="uil uil-scenery nav__icon"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="index.html#contact" class="nav__link">
+                                <i class="uil uil-message nav__icon"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <i class="uil uil-times nav__close" id="nav-close"></i>
+                </div>
+                
+                <div class="nav__btns">
+                    <!-- Theme change button -->
+                    <i class="uil uil-moon change-theme" id="theme-button"></i>
+                    
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="uil uil-apps"></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <section class="projects section" id="projects">
+                <div class="projects__container container">
+                    <div class="projects__header">
+                        <h2 class="projects__title">GitHub Projects</h2>
+                        <p class="projects__description">
+                            Browse through my collection of projects showcasing my technical skills and experience in various technologies.
+                            Each project features source code on GitHub and some include live demos.
+                        </p>
+                        
+                        <div class="projects__controls">
+                            <div class="search__container">
+                                <input type="text" id="search-input" class="search__input" placeholder="Search projects...">
+                                <i class="uil uil-search search__icon"></i>
+                            </div>
+                            
+                            <div class="filter__container">
+                                <label for="filter-select" class="filter__label">Filter by:</label>
+                                <select id="filter-select" class="filter__select">
+                                    <option value="all">All Technologies</option>
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="loading-container" class="loading-container">
+                        <div class="loading-spinner"></div>
+                        <p class="loading-text">Loading projects from GitHub...</p>
+                    </div>
+                    
+                    <div id="projects-grid" class="projects__grid">
+                        <!-- Project cards will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Project Modal -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer__bg">
+                <div class="footer__container container grid">
+                    <div>
+                        <h1 class="footer__title">Pushkar</h1>
+                        <span class="footer__subtitle">Web Developer</span>
+                    </div>
+                    
+                    <ul class="footer__links">
+                        <li>
+                            <a href="index.html#skills" class="footer__link">Skills</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">Projects</a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact" class="footer__link">Contact</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="footer__socials">
+                        <a href="https://github.com/pushkar-0553" target="_blank" class="footer__social">
+                            <i class="uil uil-github-alt"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/pushkar-waykole" target="_blank" class="footer__social">
+                            <i class="uil uil-linkedin-alt"></i>
+                        </a>
+                        <a href="https://twitter.com/pushkar0553" target="_blank" class="footer__social">
+                            <i class="uil uil-twitter-alt"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <p class="footer__copy">&#169; Pushkar Waykole. All rights reserved</p>
+            </div>
+        </footer>
+
+        <!-- SCROLL TOP -->
+        <a href="#" class="scrollup" id="scroll-up">
+            <i class="uil uil-arrow-up scrollup__icon"></i>
+        </a>
+
+        <!-- MAIN JS -->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/projects.js"></script>
+    </body>
+</html> 
