@@ -3,100 +3,90 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Projects showcase by Kagitha Pushkara Sai Vardhan">
-        
+        <meta name="description" content="GitHub projects by Kagitha Pushkara Sai Vardhan">
+
         <!-- Favicon -->
-        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
-        
-        <!-- UNICONS -->
+        <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Box Icons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- UNICONS (for existing project icons) -->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-        
+
         <!-- CSS -->
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="projects.css">
 
-        <title>GitHub Projects | Pushkar Waykole</title>
+        <title>GitHub Projects | Kagitha Pushkara Sai Vardhan</title>
     </head>
     <body>
-        <header class="header" id="header">
-            <nav class="nav container">
-                <a href="index.html" class="nav__logo">Pushkar Waykole</a>
-                
+        <!-- Header -->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="index.html#home" class="nav__logo">Kagitha Pushkara Sai Vardhan</a>
+                </div>
+
                 <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list grid">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="index.html#skills" class="nav__link">Skills</a></li>
+                        <li class="nav__item"><a href="#projects" class="nav__link active-link">Projects</a></li>
+                        <li class="nav__item"><a href="index.html#work" class="nav__link">Work</a></li>
+                        <li class="nav__item"><a href="index.html#contact" class="nav__link">Contact</a></li>
                         <li class="nav__item">
-                            <a href="index.html" class="nav__link">
-                                <i class="uil uil-estate nav__icon"></i> Home
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="index.html#about" class="nav__link">
-                                <i class="uil uil-user nav__icon"></i> About
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="index.html#skills" class="nav__link">
-                                <i class="uil uil-file-alt nav__icon"></i> Skills
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#" class="nav__link active-link">
-                                <i class="uil uil-scenery nav__icon"></i> Projects
-                            </a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="index.html#contact" class="nav__link">
-                                <i class="uil uil-message nav__icon"></i> Contact
-                            </a>
+                            <button id="dark-mode-toggle" class="dark-mode-toggle">
+                                <i class='bx bx-moon'></i>
+                            </button>
                         </li>
                     </ul>
-                    <i class="uil uil-times nav__close" id="nav-close"></i>
                 </div>
-                
-                <div class="nav__btns">
-                    <!-- Theme change button -->
-                    <i class="uil uil-moon change-theme" id="theme-button"></i>
-                    
-                    <div class="nav__toggle" id="nav-toggle">
-                        <i class="uil uil-apps"></i>
-                    </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
                 </div>
             </nav>
         </header>
 
-        <main class="main">
+        <main class="l-main">
             <section class="projects section" id="projects">
-                <div class="projects__container container">
-                    <div class="projects__header">
-                        <h2 class="projects__title">GitHub Projects</h2>
-                        <p class="projects__description">
-                            Browse through my collection of projects showcasing my technical skills and experience in various technologies.
-                            Each project features source code on GitHub and some include live demos.
+                <h2 class="section-title">GitHub Projects</h2>
+
+                <div class="projects__container bd-grid">
+                    <div class="projects__intro">
+                        <p>
+                            Browse through my collection of projects showcasing my technical skills and experience across modern web technologies.
+                            Each project features source code on GitHub and several include live demos or extended documentation.
                         </p>
-                        
-                        <div class="projects__controls">
-                            <div class="search__container">
-                                <input type="text" id="search-input" class="search__input" placeholder="Search projects...">
-                                <i class="uil uil-search search__icon"></i>
-                            </div>
-                            
-                            <div class="filter__container">
-                                <label for="filter-select" class="filter__label">Filter by:</label>
-                                <select id="filter-select" class="filter__select">
-                                    <option value="all">All Technologies</option>
-                                    <!-- Options will be populated by JavaScript -->
-                                </select>
-                            </div>
+                    </div>
+
+                    <div class="projects__controls">
+                        <div class="search__container">
+                            <input type="text" id="search-input" class="search__input" placeholder="Search projects...">
+                            <i class="uil uil-search search__icon"></i>
+                        </div>
+
+                        <div class="filter__container">
+                            <label for="filter-select" class="filter__label">Filter by:</label>
+                            <select id="filter-select" class="filter__select">
+                                <option value="all">All Technologies</option>
+                                <!-- Options populated via JavaScript -->
+                            </select>
                         </div>
                     </div>
-                    
+
                     <div id="loading-container" class="loading-container">
                         <div class="loading-spinner"></div>
                         <p class="loading-text">Loading projects from GitHub...</p>
                     </div>
-                    
+
                     <div id="projects-grid" class="projects__grid">
-                        <!-- Project cards will be populated here by JavaScript -->
+                        <!-- Project cards will be injected by projects.js -->
                     </div>
                 </div>
             </section>
@@ -109,51 +99,28 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <footer class="footer">
-            <div class="footer__bg">
-                <div class="footer__container container grid">
-                    <div>
-                        <h1 class="footer__title">Pushkar</h1>
-                        <span class="footer__subtitle">Web Developer</span>
-                    </div>
-                    
-                    <ul class="footer__links">
-                        <li>
-                            <a href="index.html#skills" class="footer__link">Skills</a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__link">Projects</a>
-                        </li>
-                        <li>
-                            <a href="index.html#contact" class="footer__link">Contact</a>
-                        </li>
-                    </ul>
-                    
-                    <div class="footer__socials">
-                        <a href="https://github.com/pushkar-0553" target="_blank" class="footer__social">
-                            <i class="uil uil-github-alt"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/pushkar-waykole" target="_blank" class="footer__social">
-                            <i class="uil uil-linkedin-alt"></i>
-                        </a>
-                        <a href="https://twitter.com/pushkar0553" target="_blank" class="footer__social">
-                            <i class="uil uil-twitter-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <p class="footer__copy">&#169; Pushkar Waykole. All rights reserved</p>
+            <p class="footer__title">Kagitha Pushkara Sai Vardhan</p>
+            <div class="footer__social">
+                <a href="https://github.com/pushkar-0553" target="_blank" class="footer__icon"><i class='bx bxl-github'></i></a>
+                <a href="https://linkedin.com/in/pushkar-waykole" target="_blank" class="footer__icon"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://twitter.com/pushkar0553" target="_blank" class="footer__icon"><i class='bx bxl-twitter'></i></a>
             </div>
+            <p class="footer__copy">&#169; <span id="current-year"></span> All rights reserved</p>
         </footer>
 
-        <!-- SCROLL TOP -->
-        <a href="#" class="scrollup" id="scroll-up">
-            <i class="uil uil-arrow-up scrollup__icon"></i>
-        </a>
+        <!-- EmailJS Script -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-        <!-- MAIN JS -->
+        <!-- Scroll Reveal -->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!-- Typed.js -->
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+        <!-- Main JS -->
         <script src="main.js"></script>
         <script src="projects.js"></script>
     </body>
-
-</html> 
+</html>
