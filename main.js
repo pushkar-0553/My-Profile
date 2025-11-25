@@ -2,7 +2,7 @@
 window.addEventListener('load', () => {
     // Initialize Typed.js
     const typed = new Typed('.typed', {
-        strings: ['Full Stack Developer', 'UI/UX Designer', 'Problem Solver', 'Tech Enthusiast'],
+        strings: ['Full Stack Web Developer', 'UI/UX Designer', 'Problem Solver', 'Tech Enthusiast'],
         typeSpeed: 50,
         backSpeed: 30,
         backDelay: 2000,
