@@ -220,6 +220,7 @@ img {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    z-index: 1; 
 }
 
 .button::before {
@@ -232,6 +233,7 @@ img {
     background: var(--hover-gradient);
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: -1; /* keeps the gradient behind text */
 }
 
 .button:hover::before {
@@ -239,17 +241,7 @@ img {
 }
 
 .button:hover {
-
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    background: var(--gradient-color);
-    color: #fff;
-    padding: 1rem 2rem;
-    font-weight: var(--font-semi-bold);
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 /* Animation */
