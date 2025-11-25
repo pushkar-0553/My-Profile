@@ -854,6 +854,7 @@ body.dark-theme .loading-spinner {
     border-radius: .75rem;
     padding: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #a855f7;
 }
 
 .search__container {
