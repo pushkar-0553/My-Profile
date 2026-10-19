@@ -3,21 +3,27 @@ import { config } from '../../config/env.js';
 
 const SESSION_MAX_AGE_MS = 2 * 60 * 60 * 1000; // 2 hours privileged admin session
 
+function isCrossSiteSecure() {
+  return config.nodeEnv === 'production' || (config.frontendUrl && config.frontendUrl.startsWith('https://'));
+}
+
 function setSessionCookie(res, token) {
+  const secure = isCrossSiteSecure();
   res.cookie('admin_session', token, {
     httpOnly: true,
-    secure: config.nodeEnv === 'production',
-    sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
+    secure: secure,
+    sameSite: secure ? 'none' : 'lax',
     maxAge: SESSION_MAX_AGE_MS,
     path: '/'
   });
 }
 
 function clearSessionCookie(res) {
+  const secure = isCrossSiteSecure();
   res.clearCookie('admin_session', {
     httpOnly: true,
-    secure: config.nodeEnv === 'production',
-    sameSite: config.nodeEnv === 'production' ? 'none' : 'lax',
+    secure: secure,
+    sameSite: secure ? 'none' : 'lax',
     path: '/'
   });
 }
