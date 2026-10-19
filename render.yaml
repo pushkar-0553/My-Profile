@@ -1,0 +1,72 @@
+# ============================================================
+# Render Blueprint Specification (render.yaml)
+# Personal Portfolio CMS — Backend Web Service
+# ============================================================
+
+services:
+  - type: web
+    name: portfolio-backend
+    runtime: node
+    plan: free
+    region: oregon # Render Free tier region: oregon, frankfurt, ohio, or singapore
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 5000
+
+      # Production frontend URL on Vercel (e.g., https://your-portfolio.vercel.app)
+      - key: FRONTEND_URL
+        sync: false
+
+      # TiDB Cloud Serverless Connection
+      - key: TIDB_HOST
+        sync: false
+
+      - key: TIDB_PORT
+        value: "4000"
+
+      - key: TIDB_USER
+        sync: false
+
+      - key: TIDB_PASSWORD
+        sync: false
+
+      - key: TIDB_DATABASE
+        sync: false
+
+      - key: TIDB_ENABLE_SSL
+        value: "true"
+
+      # Security & Admin Session Management
+      - key: JWT_SECRET
+        generateValue: true
+
+      - key: JWT_EXPIRY
+        value: 2h
+
+      - key: ADMIN_EMAIL
+        sync: false
+
+      # WebAuthn / Passkey Relying Party Configuration
+      - key: WEBAUTHN_RP_ID
+        sync: false
+
+      - key: WEBAUTHN_RP_NAME
+        value: Pushkara Portfolio Admin
+
+      - key: WEBAUTHN_ORIGIN
+        sync: false
+
+      # GitHub Personal Access Token (for CMS repo sync; private to backend)
+      - key: GITHUB_PERSONAL_ACCESS_TOKEN
+        sync: false
+
+      - key: GITHUB_USERNAME
+        value: pushkar-0553

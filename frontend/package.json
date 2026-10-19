@@ -8,6 +8,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "@simplewebauthn/browser": "^14.0.0",
     "dompurify": "^3.4.17",
