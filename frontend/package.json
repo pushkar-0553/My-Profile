@@ -9,13 +9,17 @@
     "preview": "vite preview"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": "22.x"
+  },
+  "allowScripts": {
+    "esbuild": true
   },
   "dependencies": {
     "@simplewebauthn/browser": "^14.0.0",
     "dompurify": "^3.4.17",
     "lucide-react": "^0.469.0",
     "marked": "^18.1.1",
+    "my-profile": "file:..",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.1",

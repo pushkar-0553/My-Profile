@@ -1,71 +1,116 @@
-# My-Profile
+# Personal Portfolio & Content Management System (CMS)
 
-Personal portfolio for **Kagitha Pushkara Sai Vardhan** showcasing experience, featured work, and a live GitHub projects explorer. The site is built as a fast, responsive static application that can be hosted on any static hosting provider (GitHub Pages, Netlify, Vercel, etc.).
+A modern, high-performance portfolio application and dynamic content management system designed for **Kagitha Pushkara Sai Vardhan**.
 
-## Features
-
-1. **Hero & About sections** with animated headings (Typed.js) and highlighted skills/education timeline.
-2. **Skills grid** with progress indicators and floating technology icons.
-3. **Dynamic Projects section** that retrieves repositories directly from GitHub, complete with filtering, search, topics, and modal details.
-4. **Contact form** connected to backend API and database with an admin visitor messages inbox.
-5. **Dark mode** and responsive navigation optimized for mobile & desktop.
-
-## Technologies Used
-
-| Layer | Technologies |
-| --- | --- |
-| Core | HTML5, CSS3, Vanilla JavaScript, React (Vite) |
-| Styling & Layout | Custom CSS modules (`styles.css`, `projects.css`), CSS Grid/Flexbox |
-| UI/UX Enhancements | Google Fonts (Poppins), Boxicons, Unicons, ScrollReveal, Typed.js |
-| Data & Logic | GitHub REST API v3, TiDB Cloud / MySQL Database |
-| Backend | Node.js, Express, MySQL2, Passkey Auth |
-
-## APIs & Services
-
-- **GitHub REST API** – `projects.js` consumes `/users/:username/repos`, `/repos/:owner/:repo/contents/cover.png`, and `/repos/:owner/:repo/topics` to populate the Projects page. Optional authentication (personal access token) can be supplied via the `GITHUB_TOKEN` constant or `localStorage.github_token` to raise rate limits.
-- **Visitor Messages** – The contact form posts visitor details directly to `/api/public/contact`, storing them securely in the database. All inquiries are immediately visible in the Admin CMS under `/admin/messages` (Visitor Messages).
-
-## Getting Started
-
-1. **Clone** the repository
-   ```bash
-   git clone https://github.com/<your-username>/My-Profile.git
-   cd My-Profile
-   ```
-2. **Configure (optional)**
-   - Replace `GITHUB_USERNAME` (and optionally `GITHUB_TOKEN`) inside `projects.js` if you want to show a different GitHub profile.
-3. **Run locally**
-   - Open `index.html` (or `projects.html`) directly in a browser, or serve the folder with any static server (e.g., `npx serve .`).
-
-## Project Structure
-
-```
-My-Profile/
-├── index.html          # Main portfolio page
-├── projects.html       # Dedicated GitHub projects explorer
-├── styles.css          # Global styles/theme
-├── projects.css        # Projects-page specific styles
-├── main.js             # Navigation, dark mode, animations, EmailJS wiring
-├── projects.js         # GitHub API integration & modal logic
-└── assets/             # Images, favicon, resume, etc.
-```
-
-## Customization Tips
-
-- Replace placeholder social links and profile media in `index.html`.
-- Add `cover.png` to individual GitHub repositories to show custom thumbnails inside the Projects grid.
-- Adjust theme colors in `:root` within `styles.css`; dark-mode overrides live under the `.dark-mode` selector.
-
-## Mailing Service Notes
-
-- Requires an EmailJS account with a browser (public) API key.
-- In `main.js`, update:
-  ```js
-  emailjs.init('YOUR_PUBLIC_KEY');
-  emailjs.send('your_service_id', 'your_template_id', templateParams);
-  ```
-- Ensure the EmailJS template includes `name`, `reply_to`, and `message` variables as used in `templateParams`.
+Built with a decoupled architecture:
+- **Frontend**: React 18, Vite, Three.js, Marked, SimpleWebAuthn, Lucide Icons (hosted on [Vercel](https://vercel.com)).
+- **Backend**: Node.js, Express, MySQL2 / TiDB Cloud Serverless, WebAuthn Passkeys, TOTP 2FA, Helmet, Rate Limiting (hosted on [Render](https://render.com)).
 
 ---
 
-Feel free to fork and adapt this portfolio to your own branding. Contributions and suggestions are welcome!
+## Architecture Overview
+
+```
+My-Profile/
+├── frontend/                # Client Single Page Application (React 18 + Vite)
+│   ├── src/
+│   │   ├── common/          # Shared hooks, context, and utilities
+│   │   └── features/
+│   │       ├── public/      # Public portfolio pages (Home, Projects, About, Contact)
+│   │       └── admin/       # Authenticated CMS (Projects, Skills, Experience, Messages, Security)
+│   ├── public/              # Static public assets (Favicon, icons)
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/                 # REST API & CMS Service (Node.js + Express)
+│   ├── server.js            # Express server entry point
+│   ├── render.yaml          # Render service blueprint
+│   ├── src/
+│   │   ├── config/          # DB connection (TiDB Cloud Serverless / In-Memory fallback), CORS, Env
+│   │   ├── modules/         # Auth, Projects, Profile, Contact, GitHub sync
+│   │   ├── middleware/      # Rate limiting, auth verification
+│   │   └── scripts/         # DB migrations and seeders
+│   └── package.json
+│
+├── render.yaml              # Root Render blueprint specification
+├── vercel.json              # Root Vercel deployment & SPA routing configuration
+└── package.json             # Root monorepo build scripts
+```
+
+---
+
+## Key Features
+
+1. **Interactive Public Portfolio**:
+   - Dynamic 3D interactive hero canvas using Three.js.
+   - Comprehensive technical case study narrative viewer with YouTube-style theater video previews, GitHub README renderer, and dynamic architectural flow diagrams.
+   - Live GitHub projects importer and synchronized repository showcases.
+   - Responsive dark and light theme toggle with system preference detection.
+   - Visitor contact form with instant persistence to database and admin notifications.
+
+2. **Full-Featured Admin CMS**:
+   - **Passwordless Passkey (WebAuthn / FIDO2)** authentication with biometric login.
+   - **Time-based One-Time Password (TOTP 2FA)** backup security.
+   - Granular section display controls for projects (toggle problem, solution, architecture, challenges, or markdown narrative visibility).
+   - In-depth project editor with rich metadata, tags, and media management.
+   - Skills manager, experience timeline manager, and visitor messages inbox.
+
+---
+
+## Local Development
+
+### Prerequisites
+- Node.js `22.x` (LTS)
+- npm `10.x` or later
+
+### Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pushkar-0553/My-Profile.git
+   cd My-Profile
+   ```
+
+2. **Install Frontend Dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Install Backend Dependencies:**
+   ```bash
+   cd ../backend
+   npm install
+   ```
+
+4. **Environment Configuration:**
+   - Copy `.env.example` in `backend/` to `.env` and configure your TiDB / MySQL credentials, JWT secret, and admin email.
+
+5. **Run Development Servers:**
+   - **Backend API** (Runs on `http://127.0.0.1:5000`):
+     ```bash
+     cd backend
+     npm run dev
+     ```
+   - **Frontend App** (Runs on `http://localhost:5173`):
+     ```bash
+     cd frontend
+     npm run dev
+     ```
+
+---
+
+## Deployment
+
+### Frontend (Vercel)
+- Connect repository to Vercel.
+- Vercel automatically detects [vercel.json](vercel.json).
+- Set Environment Variable:
+  - `VITE_API_BASE_URL`: `https://<your-render-backend-url>/api`
+
+### Backend (Render)
+- Connect repository to Render as a Web Service.
+- Set Root Directory to `backend` (or deploy with the included [render.yaml](render.yaml) blueprint).
+- Set Environment Variables:
+  - `FRONTEND_URL`: `https://<your-vercel-domain>.vercel.app`
+  - TiDB connection parameters (`TIDB_HOST`, `TIDB_USER`, `TIDB_PASSWORD`, `TIDB_DATABASE`).
