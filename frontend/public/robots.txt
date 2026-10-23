@@ -1,0 +1,16 @@
+# Robots.txt for Kagitha Pushkara Sai Vardhan Portfolio
+# Production Domain: https://my-profile-seven-murex.vercel.app
+
+User-agent: *
+Allow: /
+
+# Protected Admin & Authentication Endpoints
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/admin
+Disallow: /api/admin/*
+Disallow: /api/auth
+Disallow: /api/auth/*
+
+# Authoritative Dynamic XML Sitemap
+Sitemap: https://my-profile-seven-murex.vercel.app/sitemap.xml

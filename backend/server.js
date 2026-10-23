@@ -39,6 +39,7 @@ const configuredFrontendOrigins = (config.frontendUrl || '')
 
 const allowedOrigins = [
   ...configuredFrontendOrigins,
+  'https://my-profile-seven-murex.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000',
   'http://127.0.0.1:5173'
@@ -108,7 +109,13 @@ app.use(['/api/admin', '/api/auth'], (req, res, next) => {
   next();
 });
 
-// 7. Health check endpoint (lightweight status, no credentials exposed)
+// 7. Robots.txt on API server (prevents crawler indexing of raw API routes)
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nDisallow: /\n');
+});
+
+// 8. Health check endpoint (lightweight status, no credentials exposed)
 app.get('/api/health', (req, res) => {
   const dbStatus = getDbStatus();
   res.setHeader('Cache-Control', 'no-store, private');
@@ -123,7 +130,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 8. API Routes
+// 9. API Routes
 app.use('/api/admin/auth', authRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/public/projects', publicProjectsRoutes);
@@ -135,7 +142,7 @@ app.use('/api/admin/github', githubRoutes);
 app.use('/api/admin/profile', adminProfileRoutes);
 app.use('/api/admin/contact', adminContactRoutes);
 
-// 9. 404 Handler
+// 10. 404 Handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -144,7 +151,7 @@ app.use((req, res) => {
   });
 });
 
-// 10. Global Error Handler (Sanitized for Production)
+// 11. Global Error Handler (Sanitized for Production)
 app.use((err, req, res, next) => {
   console.error('[Error] Unhandled server error:', {
     requestId: req.id,

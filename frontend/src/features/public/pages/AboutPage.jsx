@@ -16,6 +16,9 @@ import {
   Palette
 } from 'lucide-react';
 import { apiRequest } from '../../../common/utils/api.js';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildProfilePageSchema } from '../../../common/utils/seoHelper.js';
 
 export function AboutPage() {
   const [profile, setProfile] = useState(null);
@@ -72,6 +75,12 @@ export function AboutPage() {
 
   return (
     <div className="section" style={{ paddingTop: '3.5rem', paddingBottom: '6rem' }}>
+      <SEOHead
+        title={`About — ${SEO_CONFIG.personName} | Software Engineer & Background`}
+        description={`Learn about ${SEO_CONFIG.personName}, Software Engineer & Frontend Developer specializing in React, TypeScript, Node.js, and scalable web architectures.`}
+        canonical={`${SEO_CONFIG.siteUrl}/about`}
+        structuredData={buildProfilePageSchema(`${SEO_CONFIG.siteUrl}/about`, `Professional biography and technical competencies of ${SEO_CONFIG.personName}.`)}
+      />
       <div className="container" style={{ maxWidth: '980px' }}>
         {/* ── 01. EDITORIAL HEADER & PORTRAIT ────────────────── */}
         <div

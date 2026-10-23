@@ -10,6 +10,9 @@ import {
 } from 'lucide-react';
 import { apiRequest } from '../../../common/utils/api.js';
 import ProjectMedia from '../components/ProjectMedia.jsx';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildProfilePageSchema } from '../../../common/utils/seoHelper.js';
 
 // Lazy-load Three.js hero effect so it never blocks initial page load
 const HeroCanvas = React.lazy(() => import('../components/HeroCanvas.jsx'));
@@ -288,6 +291,12 @@ export function HomePage() {
 
   return (
     <div className="home-page" style={{ position: 'relative' }}>
+      <SEOHead
+        title={`${SEO_CONFIG.personName} — Software Engineer | Frontend & MERN Stack Developer`}
+        description={SEO_CONFIG.description}
+        canonical={`${SEO_CONFIG.siteUrl}/`}
+        structuredData={buildProfilePageSchema(`${SEO_CONFIG.siteUrl}/`, SEO_CONFIG.description)}
+      />
       {/* ── 01. HERO (Lightweight, Minimal, Technical) ───────── */}
       <section
         style={{

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { Search, ArrowRight, ExternalLink, Github, Code2, RotateCcw } from 'lucide-react';
 import { apiRequest } from '../../../common/utils/api.js';
 import ProjectMedia from '../components/ProjectMedia.jsx';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildCollectionPageSchema } from '../../../common/utils/seoHelper.js';
 
 export function ProjectsPage() {
   const [projects, setProjects] = useState([]);
@@ -56,6 +59,12 @@ export function ProjectsPage() {
 
   return (
     <div className="section" style={{ paddingTop: '3.5rem', paddingBottom: '6rem' }}>
+      <SEOHead
+        title={`Projects Archive — ${SEO_CONFIG.personName} | Engineering Case Studies`}
+        description={`Explore software engineering projects, web applications, and UI/UX systems engineered by ${SEO_CONFIG.personName}.`}
+        canonical={`${SEO_CONFIG.siteUrl}/projects`}
+        structuredData={buildCollectionPageSchema(projects)}
+      />
       <div className="container">
         {/* Editorial Clean Header */}
         <div style={{ maxWidth: '780px', marginBottom: '3rem' }}>

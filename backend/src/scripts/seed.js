@@ -16,7 +16,7 @@ export const initialData = {
     meta_description: 'Portfolio of Pushkara Sai Vardhan Kagitha - Frontend Developer & MERN Stack Developer specializing in React.js, JavaScript, Tailwind CSS, Node.js, Express, MongoDB, and Figma.',
     contact_email: 'kagithapushkara@gmail.com',
     phone: '+91 7842770553',
-    portfolio_url: 'https://my-profile-self-theta.vercel.app',
+    portfolio_url: 'https://my-profile-seven-murex.vercel.app',
     github_url: 'https://github.com/pushkar-0553',
     linkedin_url: 'https://www.linkedin.com/in/pushkara-sai-vardhan-kagitha-2345b5283',
     hero_headline: "Frontend & MERN Stack Developer | UI Developer",

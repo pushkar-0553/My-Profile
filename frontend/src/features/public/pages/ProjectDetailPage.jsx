@@ -28,6 +28,9 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import { apiRequest } from '../../../common/utils/api.js';
 import ProjectMedia from '../components/ProjectMedia.jsx';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildProjectSchema, buildBreadcrumbSchema } from '../../../common/utils/seoHelper.js';
 
 // Configure marked with GitHub Flavored Markdown rules
 marked.setOptions({
@@ -659,8 +662,27 @@ export function ProjectDetailPage() {
     }
   };
 
+  const canonicalUrl = `${SEO_CONFIG.siteUrl}/projects/${project?.slug || slug}`;
+  const projectSchema = buildProjectSchema(project, canonicalUrl);
+  const breadcrumbsSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: `${SEO_CONFIG.siteUrl}/` },
+    { name: 'Projects', url: `${SEO_CONFIG.siteUrl}/projects` },
+    { name: project?.title || 'Case Study', url: canonicalUrl }
+  ]);
+  const combinedSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [projectSchema, breadcrumbsSchema].filter(Boolean)
+  };
+
   return (
     <div className="theater-page-container">
+      <SEOHead
+        title={`${project.title} — ${SEO_CONFIG.personName} | Engineering Case Study`}
+        description={project.short_summary || project.problem || SEO_CONFIG.description}
+        canonical={canonicalUrl}
+        ogImage={mediaUrl}
+        structuredData={combinedSchema}
+      />
       {/* ── 01. SPLIT HERO: LEFT = VIDEO/DEMO (HALF SCREEN), RIGHT = DETAILS ── */}
       <div className="case-study-split-hero">
         {/* Left Column: Interactive Media Stage */}

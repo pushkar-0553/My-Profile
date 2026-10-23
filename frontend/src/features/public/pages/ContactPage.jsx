@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Linkedin, Github, Send, CheckCircle2 } from 'lucide-react';
 import { apiRequest } from '../../../common/utils/api.js';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildBreadcrumbSchema } from '../../../common/utils/seoHelper.js';
 
 export function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -28,8 +31,20 @@ export function ContactPage() {
     }
   };
 
+  const breadcrumbs = [
+    { name: 'Home', url: `${SEO_CONFIG.siteUrl}/` },
+    { name: 'Contact', url: `${SEO_CONFIG.siteUrl}/contact` }
+  ];
+
   return (
     <div className="section" style={{ paddingTop: '3.5rem', paddingBottom: '6rem' }}>
+      <SEOHead
+        title={`Contact — ${SEO_CONFIG.personName} | Get in Touch`}
+        description={`Connect directly with ${SEO_CONFIG.personName} for software engineering roles, frontend contracts, or technical collaboration.`}
+        canonical={`${SEO_CONFIG.siteUrl}/contact`}
+        structuredData={buildBreadcrumbSchema(breadcrumbs)}
+      />
+
       <div className="container" style={{ maxWidth: '880px' }}>
         {/* Header */}
         <div style={{ marginBottom: '3rem' }}>

@@ -1,6 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, ArrowRight, RotateCcw } from 'lucide-react';
+import { SEOHead } from '../../../common/components/SEOHead.jsx';
+import { SEO_CONFIG } from '../../../common/config/seo.config.js';
+import { buildBreadcrumbSchema } from '../../../common/utils/seoHelper.js';
 
 export function SkillsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -128,8 +131,19 @@ export function SkillsPage() {
     });
   }, [skillItems, activeCategory, searchQuery]);
 
+  const breadcrumbs = [
+    { name: 'Home', url: `${SEO_CONFIG.siteUrl}/` },
+    { name: 'Skills', url: `${SEO_CONFIG.siteUrl}/skills` }
+  ];
+
   return (
     <div className="section" style={{ paddingTop: '3.5rem', paddingBottom: '6rem' }}>
+      <SEOHead
+        title={`Technical Skills & Architecture Stack — ${SEO_CONFIG.personName}`}
+        description={`Comprehensive breakdown of engineering competencies: React, TypeScript, Node.js, Express, MongoDB, UI/UX Systems, and cloud architectures.`}
+        canonical={`${SEO_CONFIG.siteUrl}/skills`}
+        structuredData={buildBreadcrumbSchema(breadcrumbs)}
+      />
       <div className="container">
         {/* Header */}
         <div style={{ maxWidth: '780px', marginBottom: '3rem' }}>
