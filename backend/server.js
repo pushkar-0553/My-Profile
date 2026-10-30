@@ -126,6 +126,11 @@ app.get('/api/health', (req, res) => {
     database: {
       connected: dbStatus.connected,
       mode: dbStatus.mode
+    },
+    github: {
+      hasToken: Boolean(config.github.token),
+      tokenPrefix: config.github.token ? config.github.token.slice(0, 10) + '...' : 'none',
+      username: config.github.username
     }
   });
 });
