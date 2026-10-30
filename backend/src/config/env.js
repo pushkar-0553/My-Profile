@@ -42,7 +42,7 @@ export const config = {
   },
 
   github: {
-    token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN || '',
-    username: process.env.GITHUB_USERNAME || 'pushkar-0553',
+    token: (process.env.GITHUB_PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '').trim(),
+    username: (process.env.GITHUB_USERNAME || 'pushkar-0553').trim(),
   }
 };

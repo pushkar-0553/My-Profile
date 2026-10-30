@@ -3,6 +3,26 @@ import { query, memoryStore } from '../../config/db.js';
 
 export class GitHubService {
   /**
+   * Builds standardized GitHub headers with Bearer authentication
+   * Supports fine-grained PATs (github_pat_*) and classic tokens (ghp_*)
+   */
+  static getHeaders(customAccept = 'application/vnd.github.v3+json') {
+    const headers = {
+      'User-Agent': 'Portfolio-CMS-Service/1.0',
+      'Accept': customAccept
+    };
+
+    if (config.github.token) {
+      const token = config.github.token.trim();
+      headers['Authorization'] = token.startsWith('Bearer ') || token.startsWith('token ')
+        ? token
+        : `Bearer ${token}`;
+    }
+
+    return headers;
+  }
+
+  /**
    * Fetch repositories for the configured username
    * Checks against existing imported projects in TiDB
    */
@@ -10,19 +30,28 @@ export class GitHubService {
     const username = config.github.username;
     const url = `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`;
 
-    const headers = {
-      'User-Agent': 'Portfolio-CMS-Service/1.0',
-      'Accept': 'application/vnd.github.v3+json'
-    };
-
-    if (config.github.token) {
-      headers['Authorization'] = `token ${config.github.token}`;
-    }
+    const headers = this.getHeaders('application/vnd.github.v3+json');
 
     const response = await fetch(url, { headers });
 
     if (!response.ok) {
-      throw new Error(`GitHub API returned status ${response.status}: ${response.statusText}`);
+      let errDetails = response.statusText;
+      try {
+        const errorJson = await response.json();
+        if (errorJson?.message) {
+          errDetails = errorJson.message;
+        }
+      } catch {
+        // Fallback to statusText
+      }
+
+      if (response.status === 403 && errDetails.toLowerCase().includes('rate limit')) {
+        throw new Error(
+          'GitHub API rate limit exceeded. Authenticate by setting GITHUB_PERSONAL_ACCESS_TOKEN in your environment variables (on Render and local .env).'
+        );
+      }
+
+      throw new Error(`GitHub API returned status ${response.status}: ${errDetails}`);
     }
 
     const repos = await response.json();
@@ -66,13 +95,7 @@ export class GitHubService {
   static async fetchReadme(repoOwner, repoName) {
     try {
       const url = `https://api.github.com/repos/${repoOwner}/${repoName}/readme`;
-      const headers = {
-        'User-Agent': 'Portfolio-App',
-        'Accept': 'application/vnd.github.raw+json'
-      };
-      if (config.github.token) {
-        headers['Authorization'] = `token ${config.github.token}`;
-      }
+      const headers = this.getHeaders('application/vnd.github.raw+json');
       const response = await fetch(url, { headers });
       if (response.ok) {
         const text = await response.text();
